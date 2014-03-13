@@ -4,12 +4,10 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>堂吉柯德的主页</title>
+    <title>我是一个善良的人 | 堂吉柯德的主页</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="King.yc">
-    
-    <meta name="description" content="堂吉柯德的主页">
     
     
     
@@ -62,53 +60,90 @@
 </div>
     </header>
     <div id="container">
-      <div id="main">
-
-  <section class="post" itemscope itemprop="blogPost">
-  
-    <a href="/2014/03/13/我是一个善良的人-1/" title="我是一个善良的人" itemprop="url">
-  
-    <h1 itemprop="name">我是一个善良的人</h1>
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
     
-     
-           <p itemprop="description" ></p>
-        
+      <a href="/2014/03/13/我是一个善良的人-1/" title="我是一个善良的人" itemprop="url">我是一个善良的人</a>
+  </h1>
+  <p class="article-author">By
     
+      <a href="http://yoursite.com" title="King.yc">King.yc</a>
+    </p>
+  <p class="article-time">
     <time datetime="2014-03-13T12:38:34.000Z" itemprop="datePublished">3月 13 2014</time>
-  </a>
-</section>
+    更新日期:<time datetime="2014-03-13T12:38:34.000Z" itemprop="dateModified">3月 13 2014</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+		</div>
+		
+		  
+	</div>
+		<footer class="article-footer clearfix">
 
-  <section class="post" itemscope itemprop="blogPost">
-  
-    <a href="/2014/03/13/我是一个善良的人/" title="我是一个善良的人" itemprop="url">
-  
-    <h1 itemprop="name">我是一个善良的人</h1>
-    
-     
-           <p itemprop="description" >我就是这么善良</p>
-        
-    
-    <time datetime="2014-03-13T11:11:01.000Z" itemprop="datePublished">3月 13 2014</time>
-  </a>
-</section>
 
-  <section class="post" itemscope itemprop="blogPost">
+
+
+<div class="article-share" id="share">
+
   
-    <a href="/2014/03/11/hello-world/" title="Hello World" itemprop="url">
-  
-    <h1 itemprop="name">Hello World</h1>
+<div class="jiathis_style">
+    <span class="jiathis_txt">分享到：</span>
+    <a class="jiathis_button_tsina">新浪微博</a>
+    <a class="jiathis_button_weixin">微信</a>
+    <a class="jiathis_button_twitter">Twitter</a>
+    <a class="jiathis_button_evernote">EverNote</a>
+    <a href="http://www.jiathis.com/share?uid=1501277" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+</div>
+<script type="text/javascript" >
+    var jiathis_config={
+    data_track_clickback:true,
+    sm:"copy,renren,cqq",
+    pic:"",
+    summary:"",
     
-     
-           <p itemprop="description" >Welcome to Hexo! This is your very first post. Check documentation to learn how to use.</p>
-        
-    
-    <time datetime="2014-03-11T13:18:29.000Z" itemprop="datePublished">3月 11 2014</time>
-  </a>
-</section>
+  </script> 
+<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=
+1903486" charset="utf-8"></script>      
 
 
 </div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2014/03/13/我是一个善良的人/"  title="我是一个善良的人">
+ <strong>NEXT:</strong><br/> 
+ <span>我是一个善良的人
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section class="comment">
+	<div class="ds-thread"></div>
+</section>
+
+</div>  
       <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+  
+  </div>
 
 <div id="asidepart">
 <div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
@@ -173,6 +208,8 @@ $(document).ready(function(){
       m.removeClass('moveMain');
       a.css('display', 'block').removeClass('fadeOut');
       o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
         
     }
   });
@@ -192,12 +229,55 @@ $(document).ready(function(){
 });
 </script>
 
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
 
 
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"wyc255856"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
 
 
 
 
 
   </body>
- </html>
+</html>
