@@ -77,7 +77,7 @@
     </p>
   <p class="article-time">
     <time datetime="2014-09-13T12:38:34.000Z" itemprop="datePublished">9月 13 2014</time>
-    更新日期:<time datetime="2014-10-08T09:25:09.000Z" itemprop="dateModified">10月 8 2014</time>
+    更新日期:<time datetime="2014-10-08T09:30:17.000Z" itemprop="dateModified">10月 8 2014</time>
     
   </p>
 </header>
@@ -91,9 +91,9 @@
 		
 		<p>最近做车助手的项目，里面涉及了些蓝牙的技术。拿来和大家分享下。没接手之前以为蓝牙很难搞懂，后来才发现其实很容易。</p>
 <p>首先我们要获得一个蓝牙的实例并且对实例进行判断是否为空，若是空就是设备里没有蓝牙。然后我们就可以利用这个实例进行各种蓝牙操作了。</p>
-<pre> BluetoothAdapter adapter = BluetoothAdapter.getDefaultAdapter();
-我们可以用adapter这个蓝牙实力执行以下函数。</pre>
-<ul>
+<p><pre> BluetoothAdapter adapter = BluetoothAdapter.getDefaultAdapter();
+我们可以用adapter这个蓝牙实力执行以下函数。</pre></p>
+<p><ul>
     <li>　　cancelDiscovery()——取消本地蓝牙设备的搜索操作，如果本地设备正在进行搜索，那么调用该方法后将停止搜索操作。</li>
     <li>　　Disable()——关闭蓝牙设备。</li>
     <li>　　Enable()——打开蓝牙设备。相信大家都有过打开蓝牙的经历，一般情况下都会弹出一个窗口，说正在请求打开蓝牙设备，你是不是允许开启。</li>
@@ -104,66 +104,107 @@
     <li>　　startDiscovery()——蓝牙设备开始搜索周边设备</li>
     <li></li>
 </ul>
-下面我们来开启蓝牙打开蓝牙
-
-‘’’
-
-// 获取蓝牙适配器实例
+下面我们来开启蓝牙打开蓝牙</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+</pre></td><td class="code"><pre>
+<span class="comment">// 获取蓝牙适配器实例</span>
              BluetoothAdapter adapter = BluetoothAdapter.getDefaultAdapter();
-             if(adapter!=null)
+             <span class="keyword">if</span>(adapter!=<span class="keyword">null</span>)
             {
-                if(!adapter.isEnabled())
+                <span class="keyword">if</span>(!adapter.isEnabled())
                  {
-                    //通过这个方法来请求打开我们的蓝牙设备
-                     Intent intent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+                    <span class="comment">//通过这个方法来请求打开我们的蓝牙设备</span>
+                     Intent intent = <span class="keyword">new</span> Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
                     startActivity(intent);
                  }
             }
-             else
+             <span class="keyword">else</span>
             {
-                System.out.println("本地设备驱动异常!");
-            }</pre>
+                System.<span class="keyword">out</span>.println(<span class="string">"本地设备驱动异常!"</span>);
+            }&lt;/pre&gt;
+</pre></td></tr></table></figure>
 
-<p>‘’’</p>
 <p>搜索蓝牙设备。第一步我们要注册一个广播接收器</p>
-<p>‘’’
-IntentFilter intentFilter = new IntentFilter(BluetoothDevice.ACTION_FOUND);
-         bluetoothReceive = new BluetoothReciever();
-         registerReceiver(bluetoothReceive, intentFilter);</p>
-<p>‘’’</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+2
+3
+</pre></td><td class="code"><pre>IntentFilter intentFilter = <span class="keyword">new</span> IntentFilter(BluetoothDevice.ACTION_FOUND);
+         bluetoothReceive = <span class="keyword">new</span> BluetoothReciever();
+         registerReceiver(bluetoothReceive, intentFilter);
+</pre></td></tr></table></figure>
+
 <p>写一个接受的类</p>
-<p>‘’’ private class BluetoothReciever extends BroadcastReceiver {
- @Override
+<figure class="highlight private"><figcaption><span>class BluetoothReciever extends BroadcastReceiver {</span></figcaption><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+</pre></td><td class="code"><pre> @Override
           public void onReceive(Context context, Intent intent) {
               // TODO Auto-generated method stub
-              String action = intent.getAction();
-              if (BluetoothDevice.ACTION_FOUND.equals(action)) {
+              String action = intent<span class="preprocessor">.getAction</span>()<span class="comment">;</span>
+              if (BluetoothDevice<span class="preprocessor">.ACTION</span>_FOUND<span class="preprocessor">.equals</span>(action)) {
                   BluetoothDevice device = intent
-                         .getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
-                 System.out.println(device.getAddress());
+                         <span class="preprocessor">.getParcelableExtra</span>(BluetoothDevice<span class="preprocessor">.EXTRA</span>_DEVICE)<span class="comment">;</span>
+                 System<span class="preprocessor">.out</span><span class="preprocessor">.println</span>(device<span class="preprocessor">.getAddress</span>())<span class="comment">;</span>
              }
-         }</p>
-<pre><code> }
-</code></pre><p>‘’’
-‘’’
-Intent discoverableIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_DISCOVERABLE);
-startActivity(discoverableIntent);
-‘’’</p>
+         }
+
+     }
+</pre></td></tr></table></figure>
+
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+2
+</pre></td><td class="code"><pre><span class="attribute">Intent discoverableIntent </span>=<span class="string"> new Intent(BluetoothAdapter.ACTION_REQUEST_DISCOVERABLE);
+startActivity(discoverableIntent);</span>
+</pre></td></tr></table></figure>
+
 <p>由于蓝牙非常耗电所以我们最还在让别人能搜索到的时候设置一个时间限制。
 discoverableIntent.putExtra(BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION, 50);
 这让就设置了蓝牙可被发现50秒</p>
 <p>配对</p>
-<p>‘’’
-Set<BluetoothDevice> device= adapter.getBondedDevices();
-                 if(device.size()&gt;0)
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre></td><td class="code"><pre><span class="keyword">Set</span>&lt;BluetoothDevice&gt; device= adapter<span class="preprocessor">.getBondedDevices</span>()<span class="comment">;</span>
+                 if(device<span class="preprocessor">.size</span>()&gt;<span class="number">0</span>)
                  {
-                      for(Iterator iterator=device.iterator();iterator.hasNext();)
+                      for(Iterator iterator=device<span class="preprocessor">.iterator</span>()<span class="comment">;iterator.hasNext();)</span>
                       {
-                         BluetoothDevice bluetoothDevice=(BluetoothDevice)iterator.next();
-                          System.out.println(bluetoothDevice.getAddress());
+                         BluetoothDevice bluetoothDevice=(BluetoothDevice)iterator<span class="preprocessor">.next</span>()<span class="comment">;</span>
+                          System<span class="preprocessor">.out</span><span class="preprocessor">.println</span>(bluetoothDevice<span class="preprocessor">.getAddress</span>())<span class="comment">;</span>
                      }
                  }
-‘’’</p>
+</pre></td></tr></table></figure>
+
 <p>暂时先介绍这些功能。过段时间会把连接别的蓝牙功能拿来给大家分享</p>
 <p>demo地址：<a href="https://github.com/wyc255856/BluetoothDemo.git" target="_blank">https://github.com/wyc255856/BluetoothDemo.git</a></p>
   
