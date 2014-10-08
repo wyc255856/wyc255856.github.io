@@ -4,12 +4,14 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>Hello World | 堂吉柯德的主页</title>
+    <title>android蓝牙的基本使用 | 堂吉柯德的主页</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="King.yc">
     
-    <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation to learn how to use.">
+    <meta name="description" content="最近做车助手的项目，里面涉及了些蓝牙的技术。拿来和大家分享下。没接手之前以为蓝牙很难搞懂，后来才发现其实很容易。
+首先我们要获得一个蓝牙的实例并且对实例进行判断是否为空，若是空就是设备里没有蓝牙。然后我们就可以利用这个实例进行各种蓝牙操作了。
+ BluetoothAdapter adapter = ">
     
     
     
@@ -67,15 +69,15 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2014/03/11/hello-world/" title="Hello World" itemprop="url">Hello World</a>
+      <a href="/2014/09/13/android蓝牙的基本使用/" title="android蓝牙的基本使用" itemprop="url">android蓝牙的基本使用</a>
   </h1>
   <p class="article-author">By
     
       <a href="http://yoursite.com" title="King.yc">King.yc</a>
     </p>
   <p class="article-time">
-    <time datetime="2014-03-11T13:18:29.000Z" itemprop="datePublished">3月 11 2014</time>
-    更新日期:<time datetime="2014-03-11T13:18:29.000Z" itemprop="dateModified">3月 11 2014</time>
+    <time datetime="2014-09-13T12:38:34.000Z" itemprop="datePublished">9月 13 2014</time>
+    更新日期:<time datetime="2014-10-08T09:01:30.000Z" itemprop="dateModified">10月 8 2014</time>
     
   </p>
 </header>
@@ -87,7 +89,87 @@
 		
 		</div>
 		
-		<p>Welcome to <a href="http://zespia.tw/hexo" target="_blank">Hexo</a>! This is your very first post. Check <a href="http://zespia.tw/hexo/docs" target="_blank">documentation</a> to learn how to use.</p>
+		<p>最近做车助手的项目，里面涉及了些蓝牙的技术。拿来和大家分享下。没接手之前以为蓝牙很难搞懂，后来才发现其实很容易。</p>
+<p>首先我们要获得一个蓝牙的实例并且对实例进行判断是否为空，若是空就是设备里没有蓝牙。然后我们就可以利用这个实例进行各种蓝牙操作了。</p>
+<pre> BluetoothAdapter adapter = BluetoothAdapter.getDefaultAdapter();
+我们可以用adapter这个蓝牙实力执行以下函数。</pre>
+<ul>
+    <li>　　cancelDiscovery()——取消本地蓝牙设备的搜索操作，如果本地设备正在进行搜索，那么调用该方法后将停止搜索操作。</li>
+    <li>　　Disable()——关闭蓝牙设备。</li>
+    <li>　　Enable()——打开蓝牙设备。相信大家都有过打开蓝牙的经历，一般情况下都会弹出一个窗口，说正在请求打开蓝牙设备，你是不是允许开启。</li>
+    <li>　　getAddress()——获取蓝牙设备的MAC地址。</li>
+    <li>　　GetDefaultAdapter()——获取本地的蓝牙设备</li>
+    <li>　　getName()——获取本地蓝牙的名称</li>
+    <li>　　getRemoteDevice(String address)——根据远程设备的MAC地址来获取远程设备</li>
+    <li>　　startDiscovery()——蓝牙设备开始搜索周边设备</li>
+    <li></li>
+</ul>
+下面我们来开启蓝牙打开蓝牙
+
+[sourcecode language="cpp"]
+
+// 获取蓝牙适配器实例
+             BluetoothAdapter adapter = BluetoothAdapter.getDefaultAdapter();
+             if(adapter!=null)
+            {
+                if(!adapter.isEnabled())
+                 {
+                    //通过这个方法来请求打开我们的蓝牙设备
+                     Intent intent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+                    startActivity(intent);
+                 }
+            }
+             else
+            {
+                System.out.println("本地设备驱动异常!");
+            }</pre>
+
+<p>[/sourcecode]</p>
+<p>搜索蓝牙设备。第一步我们要注册一个广播接收器</p>
+<p>[sourcecode language=&quot;cpp&quot;]
+IntentFilter intentFilter = new IntentFilter(BluetoothDevice.ACTION_FOUND);
+         bluetoothReceive = new BluetoothReciever();
+         registerReceiver(bluetoothReceive, intentFilter);</p>
+<p>[/sourcecode]</p>
+<p>写一个接受的类</p>
+<p>[sourcecode language=&quot;cpp&quot;] private class BluetoothReciever extends BroadcastReceiver {<em id="__mceDel">  </em>
+<em id="__mceDel"><em id="__mceDel">          @Override
+          public void onReceive(Context context, Intent intent) {
+              // TODO Auto-generated method stub
+              String action = intent.getAction();
+              if (BluetoothDevice.ACTION_FOUND.equals(action)) {
+                  BluetoothDevice device = intent
+                         .getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
+                 System.out.println(device.getAddress());
+             }
+         }</p>
+<pre><code> }
+</code></pre><p>/sourcecode]</pre>
+<em id="__mceDel"></em>
+ <em></em></p>
+<p>[sourcecode language=&quot;cpp&quot;]
+Intent discoverableIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_DISCOVERABLE);
+startActivity(discoverableIntent);</p>
+<p>[/sourcecode]</p>
+<p>由于蓝牙非常耗电所以我们最还在让别人能搜索到的时候设置一个时间限制。
+discoverableIntent.putExtra(BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION, 50);
+这让就设置了蓝牙可被发现50秒</p>
+<p>配对
+<em></em></p>
+<p>[sourcecode language=&quot;cpp&quot;]
+Set<BluetoothDevice> device= adapter.getBondedDevices();
+                 if(device.size()&gt;0)
+                 {
+                      for(Iterator iterator=device.iterator();iterator.hasNext();)
+                      {
+                         BluetoothDevice bluetoothDevice=(BluetoothDevice)iterator.next();
+                          System.out.println(bluetoothDevice.getAddress());
+                     }
+                 }</p>
+<p>[/sourcecode]</p>
+<p><em>暂时先介绍这些功能。过段时间会把连接别的蓝牙功能拿来给大家分享</em></p>
+<p><em>demo地址：<a href="https://github.com/wyc255856/BluetoothDemo.git" target="_blank">https://github.com/wyc255856/BluetoothDemo.git</a>
+<em id="__mceDel"> </em></em></p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -124,14 +206,14 @@
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2014/03/13/我是一个善良的人/" title="我是一个善良的人">
-  <strong>PREVIOUS:</strong><br/>
-  <span>
-  我是一个善良的人</span>
+
+<div class="next">
+<a href="/2014/03/13/Android PreferenceActivity（设置界面）/"  title="Android PreferenceActivity（设置界面）">
+ <strong>NEXT:</strong><br/> 
+ <span>Android PreferenceActivity（设置界面）
+</span>
 </a>
 </div>
-
 
 </nav>
 

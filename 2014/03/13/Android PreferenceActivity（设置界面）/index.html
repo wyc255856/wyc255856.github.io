@@ -4,12 +4,15 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>我是一个善良的人 | 堂吉柯德的主页</title>
+    <title>Android PreferenceActivity（设置界面） | 堂吉柯德的主页</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="King.yc">
     
-    <meta name="description" content="我就是这么善良">
+    <meta name="description" content="最近做车助手项目碰到PreferenceActivity，一开始没看明白DBⅡ上的代码。不明白代码明明什么都没做。怎么就出来了这样的界面 后来才弄明白。跟大家分享下。
+PreferenceActivity是android的设置界面效果图
+
+这个Activity能够自动的把设置的信息保存起来。存储的信">
     
     
     
@@ -67,7 +70,7 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2014/03/13/我是一个善良的人/" title="我是一个善良的人" itemprop="url">我是一个善良的人</a>
+      <a href="/2014/03/13/Android PreferenceActivity（设置界面）/" title="Android PreferenceActivity（设置界面）" itemprop="url">Android PreferenceActivity（设置界面）</a>
   </h1>
   <p class="article-author">By
     
@@ -75,7 +78,7 @@
     </p>
   <p class="article-time">
     <time datetime="2014-03-13T11:11:01.000Z" itemprop="datePublished">3月 13 2014</time>
-    更新日期:<time datetime="2014-03-13T11:13:44.000Z" itemprop="dateModified">3月 13 2014</time>
+    更新日期:<time datetime="2014-10-08T09:04:28.000Z" itemprop="dateModified">10月 8 2014</time>
     
   </p>
 </header>
@@ -84,10 +87,109 @@
 		
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
-		<ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#-"><span class="toc-number">1.</span> <span class="toc-text">我就是这么善良</span></a></li></ol>
+		
 		</div>
 		
-		<h4 id="-">我就是这么善良</h4>
+		<p>最近做车助手项目碰到PreferenceActivity，一开始没看明白DBⅡ上的代码。不明白代码明明什么都没做。怎么就出来了这样的界面 后来才弄明白。跟大家分享下。</p>
+<p>PreferenceActivity是android的设置界面效果图</p>
+<p><a href="http://www.easymorse.com/wp-content/uploads/2013/05/PreferenceActivity01.png" target="_blank"><img class="alignnone size-medium wp-image-871" alt="PreferenceActivity01" src="http://www.easymorse.com/wp-content/uploads/2013/05/PreferenceActivity01-200x300.png" width="200" height="300" /></a></p>
+<p>这个Activity能够自动的把设置的信息保存起来。存储的信息通过SharedPreference的实例来获取。</p>
+<p>首先我们要在res里新建一个xml的文件夹 并且在里面在定义一个xml文件</p>
+<p>[sourcecode language=&quot;cpp&quot;]</pre>
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</p>
+<a href="PreferenceScreen
+
+xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;">PreferenceScreen
+
+xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;</a>
+
+<PreferenceCategory
+
+android:title="OBD Preferences">
+
+<p>&nbsp;</p>
+<CheckBoxPreference
+
+android:key="upload_data_preference"
+
+android:defaultValue="false"
+
+android:title="数据上传"
+
+android:summaryOff="Disable http data upload"
+
+android:summaryOn="Enable http data upload" android:dialogTitle="Enable Data Upload" android:enabled="false"/>
+
+<p>&nbsp;</p>
+<EditTextPreference
+
+android:key="upload_url_preference"
+
+android:defaultValue="http://www.ral.ucar.edu/~lambi/obd/get_data.php"
+
+android:title="上传 URL"
+
+android:summary="POST URL that will accept real-time data"
+
+android:dialogTitle="Upload URL" android:enabled="false"/>
+
+<p>&nbsp;</p>
+<EditTextPreference
+
+android:key="vehicle_id_preference"
+
+android:defaultValue=""
+
+android:title="车辆 ID"
+
+android:summary="Optional unique id of this vehicle, used with uploaded data"
+
+android:dialogTitle="Vehicle ID" />
+
+<p>&nbsp;</p>
+<ListPreference
+
+android:key="bluetooth_list_preference"
+
+android:title="匹配设备"
+
+android:summary="List of paired bluetooth devices."
+
+android:dialogTitle="Bluetooth Devices" />
+
+<p></PreferenceScreen></p>
+<pre>
+
+<p>[/sourcecode]</p>
+<p>这里CheckBoxPreference效果就和数据上传一样
+EditTextPreference（车辆id）点击的时候效果
+<a href="http://www.easymorse.com/wp-content/uploads/2013/05/preferece02.png" target="_blank"><img class="alignnone size-medium wp-image-873" alt="preferece02" src="http://www.easymorse.com/wp-content/uploads/2013/05/preferece02-200x300.png" width="200" height="300" /></a></p>
+<p>ListPreference（匹配设备）的点击后效果
+<a href="http://www.easymorse.com/wp-content/uploads/2013/05/preference03.png" target="_blank"><img class="alignnone size-medium wp-image-874" alt="preference03" src="http://www.easymorse.com/wp-content/uploads/2013/05/preference03-200x300.png" width="200" height="300" /></a></p>
+<p>现在我在说下定义这些组件的属性都是做什么用的</p>
+<p>[sourcecode language=&quot;cpp&quot;]</pre></p>
+<p>&lt;CheckBoxPreference</p>
+<p>android:key=&quot;upload_data_preference&quot;</p>
+<p>android:defaultValue=&quot;false&quot;</p>
+<p>android:title=&quot;数据上传&quot;</p>
+<p>android:summaryOff=&quot;Disable http data upload&quot;</p>
+<p>android:summaryOn=&quot;Enable http data upload&quot; android:dialogTitle=&quot;Enable Data Upload&quot; android:enabled=&quot;false&quot;/&gt;</p>
+<p><pre>[/sourcecode]</p>
+<p>这里<span style="color: #ff0000">key</span>是唯一表示，取值的时候就用key</p>
+<p><span style="color: #ff0000">defaultValue</span>是默认值</p>
+<p><span style="color: #ff0000">title</span>是标题</p>
+<p><span style="color: #ff0000">summary</span>是说明</p>
+<p><span style="color: #ff0000">dialogTitle</span>就是弹出框的标题</p>
+<p>这些都定义完了之后就是在Activity中加载了</p>
+<p>首先Activity要继承PreferenceActivity</p>
+<p>然后这里我们渲染布局时我们用的就不是setContent了而是</p>
+<p>[sourcecode language=&quot;cpp&quot;]</pre>
+addPreferencesFromResource(R.xml.preferences);</p>
+<p><pre>[/sourcecode]</p>
+<p>接下来我们要做的就是怎么将设置的信息取出来</p>
+<p>prefs = PreferenceManager.getDefaultSharedPreferences(this);</p>
+<p>prefs.ger()对应的关键字就可以取出设置所保存的值了</p>
+<p>这个demo可以通过吴老师的博客下载下来<a href="http://marshal.easymorse.com/archives/5025" target="_blank">http://marshal.easymorse.com/archives/5025</a></p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -125,18 +227,18 @@
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/2014/03/13/我是一个善良的人-1/" title="我是一个善良的人">
+ <a href="/2014/09/13/android蓝牙的基本使用/" title="android蓝牙的基本使用">
   <strong>PREVIOUS:</strong><br/>
   <span>
-  我是一个善良的人</span>
+  android蓝牙的基本使用</span>
 </a>
 </div>
 
 
 <div class="next">
-<a href="/2014/03/11/hello-world/"  title="Hello World">
+<a href="/2014/03/11/LayoutAnimation/"  title="LayoutAnimation">
  <strong>NEXT:</strong><br/> 
- <span>Hello World
+ <span>LayoutAnimation
 </span>
 </a>
 </div>
@@ -153,7 +255,7 @@
 
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
-  <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#-"><span class="toc-number">1.</span> <span class="toc-text">我就是这么善良</span></a></li></ol>
+  
   </div>
 
 <div id="asidepart">
