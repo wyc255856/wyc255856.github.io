@@ -78,7 +78,7 @@ PreferenceActivity是android的设置界面效果图
     </p>
   <p class="article-time">
     <time datetime="2014-03-13T11:11:01.000Z" itemprop="datePublished">3月 13 2014</time>
-    更新日期:<time datetime="2014-10-08T09:04:28.000Z" itemprop="dateModified">10月 8 2014</time>
+    更新日期:<time datetime="2014-10-08T09:39:55.000Z" itemprop="dateModified">10月 8 2014</time>
     
   </p>
 </header>
@@ -95,86 +95,170 @@ PreferenceActivity是android的设置界面效果图
 <p><a href="http://www.easymorse.com/wp-content/uploads/2013/05/PreferenceActivity01.png" target="_blank"><img class="alignnone size-medium wp-image-871" alt="PreferenceActivity01" src="http://www.easymorse.com/wp-content/uploads/2013/05/PreferenceActivity01-200x300.png" width="200" height="300" /></a></p>
 <p>这个Activity能够自动的把设置的信息保存起来。存储的信息通过SharedPreference的实例来获取。</p>
 <p>首先我们要在res里新建一个xml的文件夹 并且在里面在定义一个xml文件</p>
-<p>[sourcecode language=&quot;cpp&quot;]</pre>
-&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</p>
-<a href="PreferenceScreen
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+</pre></td><td class="code"><pre>&lt;?xml version=<span class="string">"1.0"</span> encoding=<span class="string">"utf-8"</span>?&gt;
 
-xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;">PreferenceScreen
+&lt;PreferenceScreen
 
-xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;</a>
+<span class="label">xmlns:</span>android=<span class="string">"http://schemas.android.com/apk/res/android"</span>&gt;
 
-<PreferenceCategory
+&lt;PreferenceCategory
 
-android:title="OBD Preferences">
+<span class="label">android:</span>title=<span class="string">"OBD Preferences"</span>&gt;
 
-<p>&nbsp;</p>
-<CheckBoxPreference
+&nbsp<span class="comment">;</span>
 
-android:key="upload_data_preference"
+&lt;CheckBoxPreference
 
-android:defaultValue="false"
+<span class="label">android:</span>key=<span class="string">"upload_data_preference"</span>
 
-android:title="数据上传"
+<span class="label">android:</span>defaultValue=<span class="string">"false"</span>
 
-android:summaryOff="Disable http data upload"
+<span class="label">android:</span>title=<span class="string">"数据上传"</span>
 
-android:summaryOn="Enable http data upload" android:dialogTitle="Enable Data Upload" android:enabled="false"/>
+<span class="label">android:</span>summaryOff=<span class="string">"Disable http data upload"</span>
 
-<p>&nbsp;</p>
-<EditTextPreference
+<span class="label">android:</span>summaryOn=<span class="string">"Enable http data upload"</span> android:dialogTitle=<span class="string">"Enable Data Upload"</span> android:enabled=<span class="string">"false"</span>/&gt;
 
-android:key="upload_url_preference"
+&nbsp<span class="comment">;</span>
 
-android:defaultValue="http://www.ral.ucar.edu/~lambi/obd/get_data.php"
+&lt;EditTextPreference
 
-android:title="上传 URL"
+<span class="label">android:</span>key=<span class="string">"upload_url_preference"</span>
 
-android:summary="POST URL that will accept real-time data"
+<span class="label">android:</span>defaultValue=<span class="string">"http://www.ral.ucar.edu/~lambi/obd/get_data.php"</span>
 
-android:dialogTitle="Upload URL" android:enabled="false"/>
+<span class="label">android:</span>title=<span class="string">"上传 URL"</span>
 
-<p>&nbsp;</p>
-<EditTextPreference
+<span class="label">android:</span>summary=<span class="string">"POST URL that will accept real-time data"</span>
 
-android:key="vehicle_id_preference"
+<span class="label">android:</span>dialogTitle=<span class="string">"Upload URL"</span> android:enabled=<span class="string">"false"</span>/&gt;
 
-android:defaultValue=""
+&nbsp<span class="comment">;</span>
 
-android:title="车辆 ID"
+&lt;EditTextPreference
 
-android:summary="Optional unique id of this vehicle, used with uploaded data"
+<span class="label">android:</span>key=<span class="string">"vehicle_id_preference"</span>
 
-android:dialogTitle="Vehicle ID" />
+<span class="label">android:</span>defaultValue=<span class="string">""</span>
 
-<p>&nbsp;</p>
-<ListPreference
+<span class="label">android:</span>title=<span class="string">"车辆 ID"</span>
 
-android:key="bluetooth_list_preference"
+<span class="label">android:</span>summary=<span class="string">"Optional unique id of this vehicle, used with uploaded data"</span>
 
-android:title="匹配设备"
+<span class="label">android:</span>dialogTitle=<span class="string">"Vehicle ID"</span> /&gt;
 
-android:summary="List of paired bluetooth devices."
+&nbsp<span class="comment">;</span>
 
-android:dialogTitle="Bluetooth Devices" />
+&lt;ListPreference
 
-<p></PreferenceScreen></p>
-<pre>
+<span class="label">android:</span>key=<span class="string">"bluetooth_list_preference"</span>
 
-<p>[/sourcecode]</p>
+<span class="label">android:</span>title=<span class="string">"匹配设备"</span>
+
+<span class="label">android:</span>summary=<span class="string">"List of paired bluetooth devices."</span>
+
+<span class="label">android:</span>dialogTitle=<span class="string">"Bluetooth Devices"</span> /&gt;
+
+&lt;/PreferenceScreen&gt;
+&lt;pre&gt;
+</pre></td></tr></table></figure>
+
 <p>这里CheckBoxPreference效果就和数据上传一样
 EditTextPreference（车辆id）点击的时候效果
 <a href="http://www.easymorse.com/wp-content/uploads/2013/05/preferece02.png" target="_blank"><img class="alignnone size-medium wp-image-873" alt="preferece02" src="http://www.easymorse.com/wp-content/uploads/2013/05/preferece02-200x300.png" width="200" height="300" /></a></p>
 <p>ListPreference（匹配设备）的点击后效果
 <a href="http://www.easymorse.com/wp-content/uploads/2013/05/preference03.png" target="_blank"><img class="alignnone size-medium wp-image-874" alt="preference03" src="http://www.easymorse.com/wp-content/uploads/2013/05/preference03-200x300.png" width="200" height="300" /></a></p>
 <p>现在我在说下定义这些组件的属性都是做什么用的</p>
-<p>[sourcecode language=&quot;cpp&quot;]</pre></p>
-<p>&lt;CheckBoxPreference</p>
-<p>android:key=&quot;upload_data_preference&quot;</p>
-<p>android:defaultValue=&quot;false&quot;</p>
-<p>android:title=&quot;数据上传&quot;</p>
-<p>android:summaryOff=&quot;Disable http data upload&quot;</p>
-<p>android:summaryOn=&quot;Enable http data upload&quot; android:dialogTitle=&quot;Enable Data Upload&quot; android:enabled=&quot;false&quot;/&gt;</p>
-<p><pre>[/sourcecode]</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</pre></td><td class="code"><pre>&lt;CheckBoxPreference
+
+<span class="label">android:</span>key=<span class="string">"upload_data_preference"</span>
+
+<span class="label">android:</span>defaultValue=<span class="string">"false"</span>
+
+<span class="label">android:</span>title=<span class="string">"数据上传"</span>
+
+<span class="label">android:</span>summaryOff=<span class="string">"Disable http data upload"</span>
+
+<span class="label">android:</span>summaryOn=<span class="string">"Enable http data upload"</span> android:dialogTitle=<span class="string">"Enable Data Upload"</span> android:enabled=<span class="string">"false"</span>/&gt;
+</pre></td></tr></table></figure>
+
 <p>这里<span style="color: #ff0000">key</span>是唯一表示，取值的时候就用key</p>
 <p><span style="color: #ff0000">defaultValue</span>是默认值</p>
 <p><span style="color: #ff0000">title</span>是标题</p>
@@ -183,12 +267,20 @@ EditTextPreference（车辆id）点击的时候效果
 <p>这些都定义完了之后就是在Activity中加载了</p>
 <p>首先Activity要继承PreferenceActivity</p>
 <p>然后这里我们渲染布局时我们用的就不是setContent了而是</p>
-<p>[sourcecode language=&quot;cpp&quot;]</pre>
-addPreferencesFromResource(R.xml.preferences);</p>
-<p><pre>[/sourcecode]</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre>addPreferencesFromResource(R<span class="preprocessor">.xml</span><span class="preprocessor">.preferences</span>)<span class="comment">;</span>
+</pre></td></tr></table></figure>
+
 <p>接下来我们要做的就是怎么将设置的信息取出来</p>
-<p>prefs = PreferenceManager.getDefaultSharedPreferences(this);</p>
-<p>prefs.ger()对应的关键字就可以取出设置所保存的值了</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+2
+3
+</pre></td><td class="code"><pre>prefs = PreferenceManager<span class="preprocessor">.getDefaultSharedPreferences</span>(this)<span class="comment">;</span>
+
+prefs<span class="preprocessor">.ger</span>()
+</pre></td></tr></table></figure>
+
+<p>对应的关键字就可以取出设置所保存的值了</p>
 <p>这个demo可以通过吴老师的博客下载下来<a href="http://marshal.easymorse.com/archives/5025" target="_blank">http://marshal.easymorse.com/archives/5025</a></p>
   
 	</div>

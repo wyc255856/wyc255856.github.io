@@ -14,9 +14,16 @@
 
 首先是定义动画。可以通过xml定义也可以通过java代码定义
 通过xml定义：
-[sourcecode language=&quot;cpp&quot;]
-
-">
+1
+2
+3
+4
+5
+6
+7
+8
+9
+&lt;gridLayoutAnimati">
     
     
     
@@ -82,7 +89,7 @@
     </p>
   <p class="article-time">
     <time datetime="2014-03-11T13:18:29.000Z" itemprop="datePublished">3月 11 2014</time>
-    更新日期:<time datetime="2014-10-08T09:04:52.000Z" itemprop="dateModified">10月 8 2014</time>
+    更新日期:<time datetime="2014-10-08T09:40:25.000Z" itemprop="dateModified">10月 8 2014</time>
     
   </p>
 </header>
@@ -99,18 +106,26 @@
 <p><a href="http://www.easymorse.com/wp-content/uploads/2013/05/device-2013-05-14-190320.png" target="_blank"><img class="alignnone size-medium wp-image-864" alt="device-2013-05-14-190320" src="http://www.easymorse.com/wp-content/uploads/2013/05/device-2013-05-14-190320-200x300.png" width="200" height="300" /></a></p>
 <p>首先是定义动画。可以通过xml定义也可以通过java代码定义</p>
 <p>通过xml定义：</p>
-<p>[sourcecode language=&quot;cpp&quot;]</p>
-<gridLayoutAnimation xmlns:android="http://schemas.android.com/apk/res/android"
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre></td><td class="code"><pre>&lt;gridLayoutAnimation xmlns:android=<span class="string">"http://schemas.android.com/apk/res/android"</span>
 
-android:rowDelay="50%"
+<span class="label">android:</span>rowDelay=<span class="string">"50%"</span>
 
-android:columnDelay="50%"
+<span class="label">android:</span>columnDelay=<span class="string">"50%"</span>
 
-android:directionPriority="none"
+<span class="label">android:</span>directionPriority=<span class="string">"none"</span>
 
-android:animation="@anim/wave_scale" />
+<span class="label">android:</span>animation=<span class="string">"@anim/wave_scale"</span> /&gt;
+</pre></td></tr></table></figure>
 
-<p>[/sourcecode]</p>
 <p>android:delay  子类动画时间间隔 （延迟）   70% 也可以是一个浮点数 如“1.2”等</p>
 <p>android:rowDelay 行延迟</p>
 <p>android:columnDelay 列延迟</p>
@@ -119,24 +134,61 @@ android:animation="@anim/wave_scale" />
 <p>normal   默认reverse  倒序random  随机</p>
 <p>android:animation  是单独子控件的动画</p>
 <p>java代码调用</p>
-<p>[sourcecode language=&quot;cpp&quot;]
-LayoutAnimationController lacOut = AnimationUtils</p>
-<p>.loadLayoutAnimation(context, R.anim.layout_cityitem);</p>
-<p>view.setLayoutAnimation(lacOut);
-[/sourcecode]</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+</pre></td><td class="code"><pre>LayoutAnimationController lacOut = AnimationUtils
+
+<span class="preprocessor">.loadLayoutAnimation</span>(context, R<span class="preprocessor">.anim</span><span class="preprocessor">.layout</span>_cityitem)<span class="comment">;</span>
+
+view<span class="preprocessor">.setLayoutAnimation</span>(lacOut)<span class="comment">;</span>
+</pre></td></tr></table></figure>
+
 <p>XML调用</p>
-<p>[sourcecode language=&quot;cpp&quot;]</p>
-<p>&lt;GridView xmlns:android=&quot;<a href="http://schemas.android.com/apk/res/android" target="_blank">http://schemas.android.com/apk/res/android</a>&quot; android:id=&quot;@+id/grid&quot;</p>
-<p>android:layoutAnimation=&quot;@anim/layout_wave_scale&quot;</p>
-<p>android:layout_width=&quot;match_parent&quot;</p>
-<p>android:layout_height=&quot;match_parent&quot;</p>
-<p>android:verticalSpacing=&quot;10dp&quot;</p>
-<p>android:horizontalSpacing=&quot;10dp&quot;</p>
-<p>android:numColumns=&quot;auto_fit&quot;</p>
-<p>android:columnWidth=&quot;60dp&quot;</p>
-<p>android:stretchMode=&quot;columnWidth&quot;</p>
-<p>android:gravity=&quot;center&quot; /&gt;
-[/sourcecode]</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+</pre></td><td class="code"><pre>
+&lt;GridView xmlns:android=<span class="string">"http://schemas.android.com/apk/res/android"</span> android:id=<span class="string">"@+id/grid"</span>
+
+<span class="label">android:</span>layoutAnimation=<span class="string">"@anim/layout_wave_scale"</span>
+
+<span class="label">android:</span>layout_width=<span class="string">"match_parent"</span>
+
+<span class="label">android:</span>layout_height=<span class="string">"match_parent"</span>
+
+<span class="label">android:</span>verticalSpacing=<span class="string">"10dp"</span>
+
+<span class="label">android:</span>horizontalSpacing=<span class="string">"10dp"</span>
+
+<span class="label">android:</span>numColumns=<span class="string">"auto_fit"</span>
+
+<span class="label">android:</span>columnWidth=<span class="string">"60dp"</span>
+
+<span class="label">android:</span>stretchMode=<span class="string">"columnWidth"</span>
+
+<span class="label">android:</span>gravity=<span class="string">"center"</span> /&gt;
+</pre></td></tr></table></figure>
+
 <p>直接写在布局或者viewgroup的属性里</p>
 <p>这样就能出来我们想要的效果了</p>
   
