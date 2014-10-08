@@ -77,7 +77,7 @@
     </p>
   <p class="article-time">
     <time datetime="2014-09-13T12:38:34.000Z" itemprop="datePublished">9月 13 2014</time>
-    更新日期:<time datetime="2014-10-08T09:01:30.000Z" itemprop="dateModified">10月 8 2014</time>
+    更新日期:<time datetime="2014-10-08T09:25:09.000Z" itemprop="dateModified">10月 8 2014</time>
     
   </p>
 </header>
@@ -106,7 +106,7 @@
 </ul>
 下面我们来开启蓝牙打开蓝牙
 
-[sourcecode language="cpp"]
+‘’’
 
 // 获取蓝牙适配器实例
              BluetoothAdapter adapter = BluetoothAdapter.getDefaultAdapter();
@@ -124,16 +124,16 @@
                 System.out.println("本地设备驱动异常!");
             }</pre>
 
-<p>[/sourcecode]</p>
+<p>‘’’</p>
 <p>搜索蓝牙设备。第一步我们要注册一个广播接收器</p>
-<p>[sourcecode language=&quot;cpp&quot;]
+<p>‘’’
 IntentFilter intentFilter = new IntentFilter(BluetoothDevice.ACTION_FOUND);
          bluetoothReceive = new BluetoothReciever();
          registerReceiver(bluetoothReceive, intentFilter);</p>
-<p>[/sourcecode]</p>
+<p>‘’’</p>
 <p>写一个接受的类</p>
-<p>[sourcecode language=&quot;cpp&quot;] private class BluetoothReciever extends BroadcastReceiver {<em id="__mceDel">  </em>
-<em id="__mceDel"><em id="__mceDel">          @Override
+<p>‘’’ private class BluetoothReciever extends BroadcastReceiver {
+ @Override
           public void onReceive(Context context, Intent intent) {
               // TODO Auto-generated method stub
               String action = intent.getAction();
@@ -144,19 +144,16 @@ IntentFilter intentFilter = new IntentFilter(BluetoothDevice.ACTION_FOUND);
              }
          }</p>
 <pre><code> }
-</code></pre><p>/sourcecode]</pre>
-<em id="__mceDel"></em>
- <em></em></p>
-<p>[sourcecode language=&quot;cpp&quot;]
+</code></pre><p>‘’’
+‘’’
 Intent discoverableIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_DISCOVERABLE);
-startActivity(discoverableIntent);</p>
-<p>[/sourcecode]</p>
+startActivity(discoverableIntent);
+‘’’</p>
 <p>由于蓝牙非常耗电所以我们最还在让别人能搜索到的时候设置一个时间限制。
 discoverableIntent.putExtra(BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION, 50);
 这让就设置了蓝牙可被发现50秒</p>
-<p>配对
-<em></em></p>
-<p>[sourcecode language=&quot;cpp&quot;]
+<p>配对</p>
+<p>‘’’
 Set<BluetoothDevice> device= adapter.getBondedDevices();
                  if(device.size()&gt;0)
                  {
@@ -165,11 +162,10 @@ Set<BluetoothDevice> device= adapter.getBondedDevices();
                          BluetoothDevice bluetoothDevice=(BluetoothDevice)iterator.next();
                           System.out.println(bluetoothDevice.getAddress());
                      }
-                 }</p>
-<p>[/sourcecode]</p>
-<p><em>暂时先介绍这些功能。过段时间会把连接别的蓝牙功能拿来给大家分享</em></p>
-<p><em>demo地址：<a href="https://github.com/wyc255856/BluetoothDemo.git" target="_blank">https://github.com/wyc255856/BluetoothDemo.git</a>
-<em id="__mceDel"> </em></em></p>
+                 }
+‘’’</p>
+<p>暂时先介绍这些功能。过段时间会把连接别的蓝牙功能拿来给大家分享</p>
+<p>demo地址：<a href="https://github.com/wyc255856/BluetoothDemo.git" target="_blank">https://github.com/wyc255856/BluetoothDemo.git</a></p>
   
 	</div>
 		<footer class="article-footer clearfix">
